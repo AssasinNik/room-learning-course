@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.devtools.ksp")
-    id ("dagger.hilt.android.plugin")
     id("org.jetbrains.kotlin.plugin.serialization")
 }
 
@@ -70,58 +69,35 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
+    implementation(libs.kotlin.stdlib)
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
+    implementation(libs.androidx.lifecycle.lifecycle.viewmodel.ktx)
 
     // Jetpack Compose
-    implementation("androidx.compose.ui:ui:1.6.8")
-    implementation("androidx.compose.material:material:1.6.8")
-    implementation("androidx.compose.ui:ui-tooling:1.6.8")
-    implementation("androidx.navigation:navigation-compose:2.7.7")
-
-    // Retrofit и OkHttp
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
-
-    // Timber для логирования
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(libs.ui)
+    implementation(libs.androidx.material)
+    implementation(libs.ui.tooling)
+    implementation(libs.navigation.compose)
 
     // Kotlin Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
     // Жизненные циклы ViewModel и Runtime
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.2")
+    implementation(libs.androidx.lifecycle.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 
-    // Gson для сериализации JSON
-    implementation("com.google.code.gson:gson:2.10.1")
 
-    // Coil для загрузки изображений
-    implementation("io.coil-kt:coil:2.2.0")
-    implementation("io.coil-kt:coil-compose:2.2.0")
+    implementation (libs.navigation.compose)
 
-    // Hilt для Dependency Injection
-    ksp("com.google.dagger:hilt-compiler:2.48")
-    implementation("com.google.dagger:hilt-android:2.48")
-    //implementation (libs.androidx.hilt.lifecycle.viewmodel)
-    //kapt (libs.androidx.hilt.compiler)
-    implementation ("androidx.navigation:navigation-compose:2.7.7")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
-
-    // Kotlin Serialization для JSON
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
 
     // Splashscreen
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.androidx.core.splashscreen)
 
 
     // Room
-    implementation("androidx.room:room-runtime:2.5.2")
-    implementation("androidx.room:room-ktx:2.5.2")
-    ksp("androidx.room:room-compiler:2.5.2")
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
 }
