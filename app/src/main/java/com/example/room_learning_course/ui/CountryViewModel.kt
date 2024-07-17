@@ -19,9 +19,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalCoroutinesApi::class)
 class CountryViewModel(
     private val dao: CountriesDao
-): ViewModel(
-
-) {
+): ViewModel() {
     private val _sortType = MutableStateFlow(SortClass.COUNTRY_NAME)
     private val _countries = _sortType
         .flatMapLatest { sortType ->
@@ -50,6 +48,7 @@ class CountryViewModel(
                     dao.deleteCountry(event.country)
                 }
             }
+
             CountriesEvent.HideDialog -> {
                 _state.update {
                     it.copy(
@@ -57,13 +56,7 @@ class CountryViewModel(
                     )
                 }
             }
-            is CountriesEvent.SaveCountPeople -> {
-                _state.update {
-                    it.copy(
-                        countPeople = event.countPeople
-                    )
-                }
-            }
+
             CountriesEvent.SaveCountry -> {
                 val countryName =state.value.countryName
                 val countPeople = state.value.countPeople
@@ -78,6 +71,7 @@ class CountryViewModel(
                     countPeople = countPeople,
                     presidentCountry = presidentCountry
                 )
+
                 viewModelScope.launch {
                     dao.insertCountry(country)
                 }
@@ -90,16 +84,21 @@ class CountryViewModel(
                     )
                 }
             }
-            is CountriesEvent.SaveCountryName -> _state.update {
+            is CountriesEvent.SaveCountPeople -> { _state.update {
+                    it.copy(
+                        countPeople = event.countPeople
+                    )
+            }}
+            is CountriesEvent.SaveCountryName -> {_state.update {
                 it.copy(
                     countryName = event.countryName
                 )
-            }
-            is CountriesEvent.SavePresidentCountry -> _state.update {
+            }}
+            is CountriesEvent.SavePresidentCountry -> {_state.update {
                 it.copy(
                     presidentCountry = event.presidentCountry
                 )
-            }
+            }}
             CountriesEvent.ShowDialog -> {
                 _state.update {
                     it.copy(

@@ -35,25 +35,30 @@ fun AddCountryDialog(
                     onEvent(CountriesEvent.SaveCountryName(it)) 
                     },
                     placeholder = {
-                        Text(text = "Название страны: ")
+                        Text(text = "Название страны")
                     }
                 )
                 TextField(
-                    value = state.countPeople,
+                    value = state.countPeople.toString(),
                     onValueChange = {
-                        onEvent(CountriesEvent.SaveCountPeople(it))
+                        if(it != ""){
+                            onEvent(CountriesEvent.SaveCountPeople(it.toInt()))
+                        }
+                        else{
+                            onEvent(CountriesEvent.SaveCountPeople(0))
+                        }
                     },
                     placeholder = {
-                        Text(text = "Численность населения: ")
+                        Text(text = "Численность населения")
                     }
                 )
                 TextField(
                     value = state.presidentCountry,
                     onValueChange = {
-                        onEvent(CountriesEvent.SaveCountryName(it))
+                        onEvent(CountriesEvent.SavePresidentCountry(it))
                     },
                     placeholder = {
-                        Text(text = "Президент страны: ")
+                        Text(text = "Президент страны")
                     }
                 )
             }
