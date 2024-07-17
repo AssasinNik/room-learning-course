@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -40,8 +41,14 @@ fun CountryScreen(
             }) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = " Add new country ")
             }
-        }
+        },
+        modifier = Modifier.padding(16.dp)
     ){padding ->
+
+        if(state.isAddingCountry){
+            AddCountryDialog(state = state, onEvent = onEvent)
+        }
+
         LazyColumn (
             contentPadding = padding,
             modifier = Modifier
@@ -86,7 +93,9 @@ fun CountryScreen(
                             fontSize = 20.sp
                         )
                         Text(text = "Численность населения: ${country.countPeople}",
-                            fontSize = 20.sp)
+                            fontSize = 18.sp)
+                        Text(text = "Президент страны: ${country.presidentCountry}",
+                            fontSize = 18.sp)
                     }
                     IconButton(onClick = { onEvent(CountriesEvent.DeleteCountry(country)) }) {
                         Icon(imageVector = Icons.Default.Delete, contentDescription = "Удаление страны")
